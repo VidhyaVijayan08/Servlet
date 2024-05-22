@@ -10,7 +10,7 @@ public interface StudentDAO{
 	
 	public void deleteStudent(Student student)throws ClassNotFoundException, SQLException;
 
-	public void updateStudent(String name) throws ClassNotFoundException, SQLException;
+	public void updateStudent() throws ClassNotFoundException, SQLException;
 	
 	public void readStudent(Student student) throws ClassNotFoundException, SQLException;
 	public static List<Student> retriveDetails() throws ClassNotFoundException, SQLException {

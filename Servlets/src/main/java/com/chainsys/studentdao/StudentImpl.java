@@ -14,7 +14,7 @@ import com.chainsys.studentmodel.Student;
 import com.chainsys.studentutil.ConnectUtil;
 
 public class StudentImpl implements StudentDAO{
-	
+	Student student = new Student();
 	
 	public void saveStudent(Student student) throws ClassNotFoundException, SQLException {
         Connection con = ConnectUtil.getConnection();
@@ -34,13 +34,14 @@ public class StudentImpl implements StudentDAO{
 
 	public void deleteStudent(Student student) throws ClassNotFoundException, SQLException {
 		Connection con = ConnectUtil.getConnection();
-		String save="delete from  student where name='dhrani'";
+		String save="delete from  student where name=?";
         PreparedStatement prepareStatement = con.prepareStatement(save);
+        prepareStatement.setString(1, student.getName());
         int rows = prepareStatement.executeUpdate();
     	System.out.println(rows + " deleted");
 	}
 
-	public void updateStudent(String name) throws ClassNotFoundException, SQLException {
+	public void updateStudent() throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		
 			  Scanner sc = new Scanner(System.in); 
@@ -50,10 +51,16 @@ public class StudentImpl implements StudentDAO{
 //		      System.out.println("Enter your name :");
 //		      String name =sc.next(); 
 //			  String name=sc.next();
-		      String save="UPDATE bloodbank SET name='Supriya' WHERE name='Supria'";
+//		      String save="UPDATE student SET name='Supriya' WHERE name='Supriyaa'";
+//		      System.out.println("Enter your name :");
+//		      String name =sc.next(); 
+//		      System.out.println("Enter your PhoneNumber :");
+//		      String phonenumber =sc.next(); 
+		      String save="UPDATE student SET name=? WHERE phonenumber=?";
 		      PreparedStatement prepareStatement = connection.prepareStatement(save);
 
-		      prepareStatement.setString(1, name);
+		      prepareStatement.setString(1, student.getName());
+		      prepareStatement.setString(2, student.getPhoneNumber());
 		      int rows = prepareStatement.executeUpdate();
 		      System.out.println(rows+" updated");
 		  
