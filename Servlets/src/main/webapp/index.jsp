@@ -48,7 +48,7 @@ for(Student obj:list){
 <td><a href="delete.html">Delete</a></td>
 <%
 }
-    %>
+%>
 </table>
 </form>
 

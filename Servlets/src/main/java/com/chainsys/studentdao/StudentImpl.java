@@ -46,21 +46,11 @@ public class StudentImpl implements StudentDAO{
 		
 			  Scanner sc = new Scanner(System.in); 
 			  Connection connection = ConnectUtil.getConnection();
-//		      System.out.println(connection);
-//		      System.out.println("Updated Name:-");
-//		      System.out.println("Enter your name :");
-//		      String name =sc.next(); 
-//			  String name=sc.next();
-//		      String save="UPDATE student SET name='Supriya' WHERE name='Supriyaa'";
-//		      System.out.println("Enter your name :");
-//		      String name =sc.next(); 
-//		      System.out.println("Enter your PhoneNumber :");
-//		      String phonenumber =sc.next(); 
 		      String save="UPDATE student SET name=? WHERE phonenumber=?";
 		      PreparedStatement prepareStatement = connection.prepareStatement(save);
-
 		      prepareStatement.setString(1, student.getName());
 		      prepareStatement.setString(2, student.getPhoneNumber());
+		     
 		      int rows = prepareStatement.executeUpdate();
 		      System.out.println(rows+" updated");
 		  
