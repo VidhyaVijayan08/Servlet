@@ -1,0 +1,14 @@
+@charset "ISO-8859-1";
+ 
+form {
+	background-color: grey;
+}
+
+center{
+	padding: 10px;
+}
+
+legend{
+	font-size:20px;
+	font-weight:800;
+}

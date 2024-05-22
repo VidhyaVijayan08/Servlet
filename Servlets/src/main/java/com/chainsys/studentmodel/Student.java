@@ -1,7 +1,7 @@
 package com.chainsys.studentmodel;
 
 public class Student {
-		String name;
+		public String name;
 		String mailId;
 		String phoneNumber;
 		//Getters and Setters
@@ -23,7 +23,7 @@ public class Student {
 		public void setPhoneNumber(String phoneNumber) {
 			this.phoneNumber = phoneNumber;
 		}
-		Student(){
+		public Student(){
 			
 		}
 		
