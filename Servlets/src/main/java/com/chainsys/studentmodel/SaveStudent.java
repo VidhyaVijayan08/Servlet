@@ -3,6 +3,7 @@ package com.chainsys.studentmodel;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,7 +34,7 @@ public class SaveStudent extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		PrintWriter pw =response.getWriter();
+//		PrintWriter pw =response.getWriter();
 //		   int userId = Integer.parseInt(request.getParameter("id"));
 	        String name = request.getParameter("Name");
 	        student.setName(name);
@@ -41,11 +42,13 @@ public class SaveStudent extends HttpServlet {
 	        student.setMailId(mailId);
 	        String phoneNumber = request.getParameter("PhoneNumber");
 	        student.setPhoneNumber(phoneNumber);
-//	        list.add(new Student(name,mailId,phoneNumber));
+	       
 	        try {
 	            studentImpl.saveStudent(student);
-	            PrintWriter writer = response.getWriter();
-	            writer.println(student.getName() + " added");
+	            List<Student> list1 = StudentImpl.retriveDetails();
+	            request.setAttribute("list1", list1);
+	            request.getRequestDispatcher("index.jsp").forward(request, response);
+	            
 	        } catch (ClassNotFoundException | SQLException e) {
 	            // TODO Auto-generated catch block
 	            e.printStackTrace();

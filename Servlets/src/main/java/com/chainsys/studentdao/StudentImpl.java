@@ -40,6 +40,8 @@ public class StudentImpl implements StudentDAO{
         int rows = prepareStatement.executeUpdate();
     	System.out.println(rows + " deleted");
 	}
+	
+	
 
 	public void updateStudent() throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub

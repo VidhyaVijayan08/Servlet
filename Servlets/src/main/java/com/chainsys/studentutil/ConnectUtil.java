@@ -2,6 +2,7 @@ package com.chainsys.studentutil;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class ConnectUtil {
@@ -15,4 +16,5 @@ public class ConnectUtil {
 			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3308/students","root","Welcome#78");
 			return connection;
 		}
+	
 }

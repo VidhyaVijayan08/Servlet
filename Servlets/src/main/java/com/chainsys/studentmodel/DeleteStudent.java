@@ -2,6 +2,8 @@ package com.chainsys.studentmodel;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.chainsys.studentdao.StudentImpl;
+import com.chainsys.studentutil.ConnectUtil;
 
 /**
  * Servlet implementation class DeleteServlet
@@ -38,31 +41,51 @@ public class DeleteStudent extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		PrintWriter pw =response.getWriter();
 	        String name = request.getParameter("Name");
 	        student.setName(name);
-	      
+
 	        try {
 	            studentImpl.deleteStudent(student);
 	            PrintWriter writer = response.getWriter();
 	            writer.println(student.getName() + " deleted");
+	            List<Student> list1 = StudentImpl.retriveDetails();
+	            request.setAttribute("list1", list1);
+	   	  
+	            request.getRequestDispatcher("index.jsp").forward(request, response);
+	            
 	        } catch (ClassNotFoundException | SQLException e) {
-	            // TODO Auto-generated catch block
 	            e.printStackTrace();
 	        
 	        }
-//	        list.add(new Student(name,mailId,phoneNumber));
-//			 request.setAttribute("list", list);
-//		     RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-//		     dispatcher.forward(request, response);
 	}
+	
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		String action = request.getParameter("action");
+//        if (action != null) {
+//            switch (action) {
+//                case "add":
+//                try {
+//                    saveStudent(request, response);
+//                } catch (ClassNotFoundException | ServletException | IOException e) {
+//                    
+//                    e.printStackTrace();
+//                }
+//                    break;
+//                case "delete":
+//                try {
+//                    deleteStudent(request, response);
+//                } catch (ClassNotFoundException | ServletException | IOException e) {
+//                
+//                    e.printStackTrace();
+//                }
+//                    break;
+//            }
+//        }
+//	}
 
 }
