@@ -50,8 +50,8 @@ public class StudentImpl implements StudentDAO{
 			  Connection connection = ConnectUtil.getConnection();
 		      String save="UPDATE student SET name=? WHERE phonenumber=?";
 		      PreparedStatement prepareStatement = connection.prepareStatement(save);
-		      prepareStatement.setString(1, student.getName());
-		      prepareStatement.setString(2, student.getPhoneNumber());
+		      prepareStatement.setString(1,"Name");
+		      prepareStatement.setString(2, "PhoneNumber");
 		     
 		      int rows = prepareStatement.executeUpdate();
 		      System.out.println(rows+" updated");
@@ -86,7 +86,7 @@ public class StudentImpl implements StudentDAO{
 	        String save="SELECT  id,mailid,phonenumber FROM student";
 	        PreparedStatement prepareStatement = connection.prepareStatement(save);
 	        Statement stmt = connection.createStatement();
-	    	ResultSet rows = stmt.executeQuery(save);
+	    	ResultSet rows = stmt.executeQuery(save); 
 	    	while (rows.next()) {
 	            String name = rows.getString("Name");
 	            String mailId = rows.getString("MailId");
@@ -98,6 +98,34 @@ public class StudentImpl implements StudentDAO{
 	    	}
 	        System.out.println(rows+" retrieved");
 	}
+	
+	
+	public List<Student> searchStudent(Student student) throws ClassNotFoundException, SQLException {
+        ArrayList<Student> list=new ArrayList<>();
+	  	Connection connection = ConnectUtil.getConnection();
+        System.out.println(connection);
+        String save="SELECT  name,mailid,phonenumber FROM student where name=?";
+        PreparedStatement prepareStatement = connection.prepareStatement(save);
+        prepareStatement.setString(1, student.getName());
+        Statement stmt = connection.createStatement();
+    	ResultSet rows = prepareStatement.executeQuery(); 
+    	while (rows.next()) {
+            String name = rows.getString("Name");
+            String mailId = rows.getString("MailId");
+            String phoneNo = rows.getString("PhoneNumber");
+//            System.out.println("Retrieved Data");
+//            System.out.println("__________________________________________________________________________________");
+//            System.out.println("Name : " + name + "\t\t Email : " + mailId  + "\t\t PhoneNumber : " + phoneNo);
+//            System.out.println("__________________________________________________________________________________");
+    		student.setName(name);
+    	    student.setMailId(mailId);
+    	    student.setPhoneNumber(phoneNo);
+            list.add(student);
+    	
+    	}
+        System.out.println(rows+" retrieved");
+		return list;
+}
 
 	  
 }

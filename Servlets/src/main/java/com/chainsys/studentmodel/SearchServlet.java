@@ -1,61 +1,57 @@
 package com.chainsys.studentmodel;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.chainsys.studentdao.StudentImpl;
 
-
 /**
- * Servlet implementation class StudentServlet
+ * Servlet implementation class SearchServlet
  */
-@WebServlet("/StudentServlet")
-public class StudentServlet extends HttpServlet {
+@WebServlet(name = "SearchServlet", urlPatterns = { "/SearchServlet" })
+public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public StudentServlet() {
+	Student student = new Student();
+	StudentImpl studentImpl = new StudentImpl();
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public SearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		
-		HttpSession session = request.getSession(false);
-		
-		if(session!=null) {
-			String name=(String) session.getAttribute("Name");
-			out.print("Welcome To Profile Servlet " + name);
-			try  
+		 String name= request.getParameter("Name");
+		 student.setName(name);
+		try 
 	        {
-	            List<Student> list1 = StudentImpl.retriveDetails();
+	            List<Student> list1 = studentImpl.searchStudent(student);
 	            request.setAttribute("list1", list1);
 	            request.getRequestDispatcher("index.jsp").forward(request, response);
 	        } 
 	        catch (ClassNotFoundException | SQLException e)
 	        {
 	            e.printStackTrace();
-	        }
-		}else {
-			response.sendRedirect("login.html");
-		}
-		out.print("<a href='logins.html'>Index</a>");
-		
-	        
-	        
-	}
+	        }	
+		 }
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

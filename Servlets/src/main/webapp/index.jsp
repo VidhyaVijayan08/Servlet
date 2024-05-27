@@ -7,10 +7,14 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <style>
+body{
+	background-image: url("backgrounds.webp");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
     table {
         border-collapse: collapse;
         width: 73%;
-        background-color: white;
         margin-top: 200px;
         margin-left: 179px;
     }
@@ -20,14 +24,24 @@
         padding: 8px;
         margin-top: 500px;
     }
+	
+	.search-button{
+	margin : 20px 0px;
+	}
+	
+	.button-container{
+	position: absolute;
+    top: 19%;
+    right: 14%;
+	}
 </style>
 </head>
 <body>
 
 <table>
 <tr>
-    <td>name</td>
-    <td>email</td>
+    <td>Name</td>
+    <td>Email</td>
     <td>PhoneNumber</td>
     <td colspan="2">Update</td>
     
@@ -47,12 +61,10 @@ if (student != null && !student.isEmpty()) {
             <input type="submit" class="delete-button" value="Delete" name="action">
         </form>
     </td>
-
+    	
     <td>
-        <form action="UpdateStudentServlet" method="post">
- 		    <input type="hidden" name="update" value=<%=obj.getPhoneNumber()%>>
-           <button> <a href="edit.html?editPhoneNumber=<%=obj.getPhoneNumber()%>" class="edit-button" style="text-decoration:none; color:black;">Edit</a></button>   
-        </form>
+    <button><a href="edit.html" style="text-decoration:none; color:black;">Edit</a> </button>
+    
     </td>
 </tr>
 <%
@@ -66,6 +78,13 @@ if (student != null && !student.isEmpty()) {
 }
 %>
 </table>
-<button><a href="insert.html" class="add-user-link" style="text-decoration:none; color:black;">Add User</a></button>
+<div class="button-container">
+<form action="SearchServlet" method="get">         
+ 		<input type="text" name="Name" id="Search" placeholder="Search ">
+ 	    <input type="submit" class="search-button" value="search" name="action">
+	<button class="search-button"><a href="insert.html" class="add-user-link" style="text-decoration:none; color:black;">Add User</a></button>
+</form>
+<button><a href="LogoutSessions" style="text-decoration:none; color:black">Logout</a></button>
+</div>
 </body>
 </html>

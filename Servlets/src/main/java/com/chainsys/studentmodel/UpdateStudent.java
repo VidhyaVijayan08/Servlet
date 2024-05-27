@@ -43,10 +43,12 @@ public class UpdateStudent extends HttpServlet {
 //		   int userId = Integer.parseInt(request.getParameter("id"));
 	        String name = request.getParameter("Name");
 	        student.setName(name);
+	        System.out.println(name);
 	        String mailId = request.getParameter("Email");
 //	        student.setMailId(mailId);
 	        String phoneNumber = request.getParameter("PhoneNumber");
 	        student.setPhoneNumber(phoneNumber);
+	        System.out.println(phoneNumber);
 //	        list.add(new Student(name,mailId,phoneNumber));
 	        try {
 	            studentImpl.updateStudent();
@@ -60,7 +62,7 @@ public class UpdateStudent extends HttpServlet {
 	        }
 	        list.add(new Student(name,mailId,phoneNumber));
 			 request.setAttribute("list", list);
-		     RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+		     RequestDispatcher dispatcher = request.getRequestDispatcher("home.html");
 		     dispatcher.forward(request, response);
 	}
 
